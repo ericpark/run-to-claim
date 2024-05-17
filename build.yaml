@@ -1,0 +1,23 @@
+targets:
+  run_to_claim:
+    sources:
+      - lib/**       
+      - pubspec.*
+      - $package$
+    builders:
+      source_gen:combining_builder:
+        options:
+          ignore_for_file:
+            - implicit_dynamic_parameter
+          build_extensions:
+            'lib/{{path}}/{{file}}.dart': 'lib/{{path}}/generated/{{file}}.g.dart'
+      json_serializable:
+        options:
+          field_rename: snake
+          checked: true
+          explicit_to_json: true
+      freezed:
+        options:
+          copy_with: true
+          build_extensions:
+            'lib/{{path}}/{{file}}.dart': 'lib/{{path}}/generated/{{file}}.freezed.dart'
